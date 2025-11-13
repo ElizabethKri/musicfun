@@ -35,7 +35,6 @@ export type PlaylistAttributes = {
     currentUserReaction: CurrentUserReaction
 }
 
-// Arguments
 export type FetchPlaylistsArgs = {
     pageNumber?: number
     pageSize?: number
@@ -45,4 +44,9 @@ export type FetchPlaylistsArgs = {
     tagsIds?: string[]
     userId?: string
     trackId?: string
+}
+
+export type CreatePlayListArgs = {
+    title: string,
+    description: string
 }
