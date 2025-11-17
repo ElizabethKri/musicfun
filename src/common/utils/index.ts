@@ -1,0 +1,1 @@
+export { getPaginationPages } from './getPaginationPage.ts'
