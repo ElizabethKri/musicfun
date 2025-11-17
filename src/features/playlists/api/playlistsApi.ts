@@ -56,7 +56,16 @@ export const playlistsApi = baseApi.injectEndpoints({
             },
             invalidatesTags: ['Playlist']
         }),
+        deletePlaylistCover: build.mutation<void, {playlistId: string}>({
+            query: ({playlistId}) =>{
+                return {
+                    method: 'delete',
+                    url: `playlists/${playlistId}/image/main`,
+                }
+            },
+            invalidatesTags: ['Playlist']
+        }),
     }),
 })
 
-export const { useFetchPlaylistsQuery, useCreatePlaylistsMutation, useDeletePlaylistsMutation, useUpdatePlaylistsMutation, useUploadPlaylistCoverMutation } = playlistsApi
+export const { useFetchPlaylistsQuery, useCreatePlaylistsMutation, useDeletePlaylistsMutation, useUpdatePlaylistsMutation, useUploadPlaylistCoverMutation, useDeletePlaylistCoverMutation } = playlistsApi

@@ -1,7 +1,7 @@
 import type {PlaylistData} from "@/features/playlists/api/playlistsApi.types.ts";
 import defaultCover from '@/assets/images/default-playlist-cover.png'
 import s from './PlaylistItem.module.css'
-import {useUploadPlaylistCoverMutation} from "@/features/playlists/api/playlistsApi.ts";
+import {useDeletePlaylistCoverMutation, useUploadPlaylistCoverMutation} from "@/features/playlists/api/playlistsApi.ts";
 import type {ChangeEvent} from "react";
 
 type PlaylistItem = {
@@ -13,6 +13,7 @@ type PlaylistItem = {
 export const PlaylistItem = ({playlist, deletePlaylistHandler,editPlaylistHandler }: PlaylistItem) => {
 
     const [uploadPlaylistCover] = useUploadPlaylistCoverMutation()
+    const [deletePlaylistCover] = useDeletePlaylistCoverMutation()
 
     const originalCover = playlist.attributes.images.main.find(img => img.type === 'original')
     const src = originalCover ? originalCover.url : defaultCover
@@ -40,10 +41,15 @@ export const PlaylistItem = ({playlist, deletePlaylistHandler,editPlaylistHandle
         })
     }
 
+    const deleteCoverHandler = () => {
+        deletePlaylistCover({playlistId: playlist.id})
+    }
+
     return (
         <div>
             <img src={src} alt={'cover'} width={'240px'} className={s.cover}/>
             <input type={'file'} accept={'image/jpeg, image/png, image/gif'} onChange={uploadPlaylistCoverHandler}/>
+            {originalCover && <button onClick={deleteCoverHandler}>delete cover</button>}
             <div>title: {playlist.attributes.title}</div>
             <div>description: {playlist.attributes.description}</div>
             <div>userName: {playlist.attributes.user.name}</div>
