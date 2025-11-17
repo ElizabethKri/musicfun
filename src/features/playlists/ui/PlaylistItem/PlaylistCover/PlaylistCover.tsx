@@ -22,10 +22,13 @@ export const PlaylistCover = ({playlistId, images} : PlaylistCoverProps ) => {
 
     const uploadPlaylistCoverHandler = (event: ChangeEvent<HTMLInputElement>) => {
 
+
+
         const allowedTypes = ['image/jpeg', 'image/png', 'image/gif']
         const maxSize = 1024*1024 // 1MB
 
         const file = event.target.files?.length && event.target.files[0]
+
         if (!file) return
 
         if(!allowedTypes.includes(file.type)){
@@ -34,6 +37,12 @@ export const PlaylistCover = ({playlistId, images} : PlaylistCoverProps ) => {
 
         if(file.size > maxSize){
             toast(`The file is too large. Max size is ${Math.round(maxSize/1024)} KB`, {type: 'error', theme: "colored"})
+        }
+
+
+
+        if(!Number.isInteger(Math.sqrt(file.size))){
+           toast('Изображение НЕ квадратное.')
         }
 
         uploadPlaylistCover({
