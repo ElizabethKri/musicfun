@@ -3,7 +3,7 @@ import s from './PlaylistsPage.module.css'
 import {CreatePlaylistForm} from "@/features/playlists/ui/PlaylistsPage/CreatePlaylistForm/CreatePlaylistForm.tsx";
 import {useForm} from "react-hook-form";
 import type {PlaylistData, UpdatePlaylistArgs} from "@/features/playlists/api/playlistsApi.types.ts";
-import {useState} from "react";
+import {type ChangeEvent, useState} from "react";
 import {PlaylistItem} from "@/features/playlists/ui/PlaylistItem/PlaylistItem.tsx";
 import {EditPlaylistForm} from "@/features/playlists/ui/EditPlaylistForm/EditPlaylistForm.tsx";
 import {useDebounceValue} from "@/common/hooks/useDebounceValue.ts";
@@ -51,6 +51,12 @@ export const PlaylistsPage = () => {
         setPageSize(size)
     }
 
+    const searchPlaylistHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        //Будет начинаться сначала
+        setCurrentPage(1)
+        setSearch(e.currentTarget.value)
+    }
+
 
 
     return (
@@ -60,7 +66,7 @@ export const PlaylistsPage = () => {
             <input
                 type={'search'}
                 placeholder={'Search playlist by title'}
-                onChange={e => setSearch(e.currentTarget.value)}
+                onChange={(e) => searchPlaylistHandler(e)}
             />
             <div className={s.items}>
                 {!data?.data.length && !isLoading && <h2>Playlist not found</h2>}
