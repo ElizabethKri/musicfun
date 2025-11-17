@@ -5,6 +5,7 @@ import type {
     UpdatePlaylistArgs
 } from "@/features/playlists/api/playlistsApi.types.ts";
 import {baseApi} from "@/app/api/baseApi.ts";
+import type {Images} from "@/common/types";
 
 export const playlistsApi = baseApi.injectEndpoints({
     endpoints: build => ({
@@ -42,7 +43,20 @@ export const playlistsApi = baseApi.injectEndpoints({
             },
             invalidatesTags: ['Playlist']
         }),
+        uploadPlaylistCover: build.mutation<Images, {playlistId: string, file:  File}>({
+            query: ({playlistId, file}) =>{
+                const formData = new FormData()
+                //1 параметр прописывается, как указано в документации бэка
+                formData.append('file', file)
+                return {
+                    method: 'post',
+                    url: `playlists/${playlistId}/image/main`,
+                    body: formData
+                }
+            },
+            invalidatesTags: ['Playlist']
+        }),
     }),
 })
 
-export const { useFetchPlaylistsQuery, useCreatePlaylistsMutation, useDeletePlaylistsMutation, useUpdatePlaylistsMutation } = playlistsApi
+export const { useFetchPlaylistsQuery, useCreatePlaylistsMutation, useDeletePlaylistsMutation, useUpdatePlaylistsMutation, useUploadPlaylistCoverMutation } = playlistsApi
