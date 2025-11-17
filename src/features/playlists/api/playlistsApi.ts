@@ -50,7 +50,7 @@ export const playlistsApi = baseApi.injectEndpoints({
                 formData.append('file', file)
                 return {
                     method: 'post',
-                    url: `playlists/${playlistId}/image/main`,
+                    url: `playlists/${playlistId}/images/main`,
                     body: formData
                 }
             },
@@ -60,7 +60,7 @@ export const playlistsApi = baseApi.injectEndpoints({
             query: ({playlistId}) =>{
                 return {
                     method: 'delete',
-                    url: `playlists/${playlistId}/image/main`,
+                    url: `playlists/${playlistId}/images/main`,
                 }
             },
             invalidatesTags: ['Playlist']
