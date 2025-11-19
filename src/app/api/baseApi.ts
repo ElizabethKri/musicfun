@@ -13,5 +13,6 @@ export const baseApi = createApi({
     }),
     reducerPath: 'baseApi',
     tagTypes: ['Playlist'],
+    keepUnusedDataFor: 10,
     endpoints: () => ({}),
 })

@@ -39,12 +39,6 @@ export const PlaylistCover = ({playlistId, images} : PlaylistCoverProps ) => {
             toast(`The file is too large. Max size is ${Math.round(maxSize/1024)} KB`, {type: 'error', theme: "colored"})
         }
 
-
-
-        if(!Number.isInteger(Math.sqrt(file.size))){
-           toast('Изображение НЕ квадратное.')
-        }
-
         uploadPlaylistCover({
             playlistId,
             file
@@ -58,8 +52,10 @@ export const PlaylistCover = ({playlistId, images} : PlaylistCoverProps ) => {
     return (
         <>
             <img src={src} alt={'cover'} width={'240px'} className={s.cover}/>
-            <input type={'file'} accept={'image/jpeg, image/png, image/gif'} onChange={uploadPlaylistCoverHandler}/>
-            {originalCover && <button onClick={deleteCoverHandler}>delete cover</button>}
+            <div>
+                <input type={'file'} accept={'image/jpeg, image/png, image/gif'} onChange={uploadPlaylistCoverHandler}/>
+                {originalCover && <button onClick={deleteCoverHandler}>delete cover</button>}
+            </div>
         </>
     );
 };
