@@ -1,10 +1,11 @@
-import s from "@/features/playlists/ui/PlaylistsPage/PlaylistsPage.module.css";
+
 import {EditPlaylistForm} from "@/features/playlists/ui/EditPlaylistForm/EditPlaylistForm.tsx";
 import {PlaylistItem} from "@/features/playlists/ui/PlaylistItem/PlaylistItem.tsx";
 import {useState} from "react";
 import {useDeletePlaylistsMutation} from "@/features/playlists/api/playlistsApi.ts";
 import {useForm} from "react-hook-form";
 import type {PlaylistData, UpdatePlaylistArgs} from "@/features/playlists/api/playlistsApi.types.ts";
+import s from "../PlayList/PlaylistList.module.css"
 
 type PlaylistListProps = {
     playlists: PlaylistData[],
@@ -37,7 +38,7 @@ export const PlaylistList = ({playlists, isPlaylistLoading} : PlaylistListProps)
 
     return (
 
-            <div className={s.items}>
+            <div className={s.itemsCard}>
                 {!playlists.length && !isPlaylistLoading && <h2>Playlist not found</h2>}
                 {playlists.map(playlist => {
                     const isEditing = playlist.id === playlistId
